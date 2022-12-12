@@ -2,9 +2,9 @@ global.fetch = require("node-fetch");
 const router = require('express').Router();
 const dotenv = require("dotenv").config();
 global.fetch = fetch;
-
-const { AccessToken } = require('./splashgram/data')
-let token = AccessToken.token
+const { LocalStorage } = require("node-localstorage");
+let localStorage = new LocalStorage('./scratch');
+let token = localStorage.getItem('access_token');
 
 // Randomize page and sorting
 const nums = ["1", "2", "3", "4", "5", "6", "7"];

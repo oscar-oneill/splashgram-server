@@ -1,10 +1,9 @@
 global.fetch = require("node-fetch");
 const router = require('express').Router();
 global.fetch = fetch;
-
-const { AccessToken } = require('./splashgram/data')
-let token = AccessToken.token
-
+const { LocalStorage } = require("node-localstorage");
+let localStorage = new LocalStorage('./scratch');
+let token = localStorage.getItem('access_token');
 
 // Retrieve Logged In User's Profile Data
 router.post("/me", async (req, res) => {

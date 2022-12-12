@@ -2,6 +2,8 @@ global.fetch = require("node-fetch");
 const router = require('express').Router();
 global.fetch = fetch;
 const fs = require('fs').promises;
+const { LocalStorage } = require("node-localstorage");
+var localStorage = new LocalStorage('./scratch'); 
 
 router.post("/login", async (req, res) => {
     const code = req.body.code;
@@ -29,35 +31,7 @@ router.post("/login", async (req, res) => {
     });
     const data = await response.json();
 
-    let storage = {
-        token: data.access_token
-    };
-
-    try {
-        if (data) {
-            console.log("Data available.")
-            console.log("Writing file...", storage)
-            fs.writeFile(`./splashgram/data.json`, JSON.stringify(storage), (err) => {
-                if (err) {
-                    console.error(err)
-                } else {
-                    console.log('Update complete!')
-                }
-            })
-            console.log("File update complete.")
-
-
-        }
-    } catch (error) {
-        console.error(error)
-    }
-
-    try {
-        const DATA_ACTUAL = require(`./splashgram/data.json`)
-        console.log(DATA_ACTUAL.token, "Generated Access Token...")
-    } catch (error) {
-        console.error(error)
-    }
+    localStorage.setItem('access_token', data.access_token);
 
     if (!data.error) {
         res.status(200).send(data);
@@ -67,9 +41,10 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
+    console.log("Current user has issued a request to logout...")
     try {
         console.log("Removing token...")
-        fs.unlink(`./splashgram/data.json`)
+        localStorage.removeItem('access_token')
         console.log("Token destroyed...")
     } catch (error) {
         console.error(error)

@@ -2,9 +2,9 @@ global.fetch = require("node-fetch");
 const router = require('express').Router();
 const dotenv = require("dotenv").config()
 global.fetch = fetch;
-
-const { AccessToken } = require('./splashgram/data')
-let token = AccessToken.token
+const { LocalStorage } = require("node-localstorage");
+let localStorage = new LocalStorage('./scratch');
+let token = localStorage.getItem('access_token');
 
 // Randomize photo feed on initial page load
 const terms = ["new york", "los angeles", "seattle", "miami", "hollywood", "brooklyn", "beach", "waves", "palm trees", "miami beach", "madrid", "forest", "desert", "random", "neon", "wallpaper", "nyc", "mediterranean", "spring", "summer", "sunrise", "sunset", "morning", "afternoon", "sao paolo", "barcelona", "istanbul", "monaco", "wonder", "bliss", "serenity"];
