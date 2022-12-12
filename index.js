@@ -4,9 +4,9 @@ const cors = require("cors")
 const path = require('path');
 const dotenv = require("dotenv").config()
 const bodyParser = require("body-parser")
-
-const { AccessToken } = require('./routes/splashgram/data')
-let token = AccessToken.token
+const { LocalStorage } = require("node-localstorage");
+let localStorage = new LocalStorage('./scratch');
+let token = localStorage.getItem('access_token');
 
 const app = express();
 const port = process.env.PORT || 9000;
