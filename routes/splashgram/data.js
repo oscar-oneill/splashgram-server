@@ -1,7 +1,7 @@
 let user;
 
 try {
-    user = require(`${__dirname}/tmp/data.json`)
+    user = require(`./splashgram/data.json`)
 } catch (error) {
     user = null;
 }

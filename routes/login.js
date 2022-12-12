@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
         if (data) {
             console.log("Data available.")
             console.log("Writing file...", storage)
-            fs.writeFile(`${__dirname}/tmp/data.json`, JSON.parse(storage), (err) => {
+            fs.writeFile(`./splashgram/data.json`, JSON.stringify(storage), (err) => {
                 if (err) {
                     console.error(err)
                 } else {
@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
     }
 
     try {
-        const DATA_ACTUAL = require(`${__dirname}/tmp/data.json`)
+        const DATA_ACTUAL = require(`./splashgram/data.json`)
         console.log(DATA_ACTUAL.token, "Generated Access Token...")
     } catch (error) {
         console.error(error)
@@ -69,7 +69,7 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (req, res) => {
     try {
         console.log("Removing token...")
-        fs.unlink(`${__dirname}/tmp/data.json`)
+        fs.unlink(`./splashgram/data.json`)
         console.log("Token destroyed...")
     } catch (error) {
         console.error(error)
