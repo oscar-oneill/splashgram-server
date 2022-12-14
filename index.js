@@ -52,7 +52,7 @@ app.get("/authorize", (req, res) => {
 if (token == null) {
     console.log("No token present.")
 } else {
-    console.log("Token:", token)
+    console.log("Active user.")
 }
 
 app.listen(port, () => {
