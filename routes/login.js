@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
         res.status(200).send(data);
     }
 
-    process.exit(1);
+    // process.exit(1);
 });
 
 router.post("/logout", (req, res) => {
@@ -50,7 +50,7 @@ router.post("/logout", (req, res) => {
         console.error(error)
     }
     console.log("User has logged out...")
-    process.exit(1); 
+    // process.exit(1); 
 });
 
 module.exports = router;
